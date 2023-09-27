@@ -4,7 +4,6 @@ import { catchError, map } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 
-
 //Declaring the api url that will provide data for the client app
 const apiUrl = '"https://myflix90.herokuapp.com"';
 
@@ -48,15 +47,17 @@ export class UserRegistrationService {
   // Get One Movie
   getOneMovie(movieId: string): Observable<any> {
     const token = localStorage.getItem('token');
-    const headers = new HttpHeaders({
-      Authorization: 'Bearer ' + token,
-    });
-
-    return this.http.get(apiUrl + 'movies/' + movieId, { headers }).pipe(
+    return this.http.get(apiUrl + 'movies/' + movieId, {
+      headers: new HttpHeaders(
+        {
+          Authorization: 'Bearer ' + token,
+        })
+    }).pipe(
       map(this.extractResponseData),
       catchError(this.handleError)
     );
   }
+
 
   // Get One Director Endpoint
   getOneDirector(directorName: string): Observable<any> {
@@ -183,3 +184,5 @@ export class UserRegistrationService {
     return throwError(() => new Error('Something bad happened; please try again later.'));
   }
 }
+
+//is this saved?
