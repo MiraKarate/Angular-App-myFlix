@@ -184,5 +184,3 @@ export class UserRegistrationService {
     return throwError(() => new Error('Something bad happened; please try again later.'));
   }
 }
-
-//is this saved?
