@@ -15,6 +15,14 @@ export class MovieCardComponent {
     this.getMovies();
   }
 
+  /**
+   * This method will get all movies from the database
+   * @param void
+   * @returns movies array
+   * @memberof MovieCardComponent
+   * @see FetchApiDataService.getAllMovies()
+   */
+
   getMovies(): void {
     this.fetchApiData.getAllMovies().subscribe((resp: any) => {
       this.movies = resp;
