@@ -23,6 +23,14 @@ import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 
 import { RouterModule, Routes } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { MovieDetailsComponent } from './movie-details/movie-details.component';
+import { NavigationComponent } from './navigation/navigation.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatListModule } from '@angular/material/list';
+
 
 const appRoutes: Routes = [
   { path: 'welcome', component: WelcomePageComponent },
@@ -39,7 +47,10 @@ const appRoutes: Routes = [
     UserRegistrationFormComponent,
     UserLoginFormComponent,
     MovieCardComponent,
-    WelcomePageComponent
+    WelcomePageComponent,
+    UserProfileComponent,
+    MovieDetailsComponent,
+    NavigationComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,7 +65,11 @@ const appRoutes: Routes = [
     MatFormFieldModule,
     MatSnackBarModule,
     RouterModule.forRoot(appRoutes),
-    MatIconModule
+    MatIconModule,
+    MatToolbarModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

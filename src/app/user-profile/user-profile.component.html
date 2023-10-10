@@ -1,0 +1,60 @@
+<div class="profile-container">
+    <div class="info-container ">
+        <div class="info">
+            <h1>User Profile</h1>
+
+            <!-- Display User Information -->
+            <div>
+                <p><strong>Username:</strong> {{ user.Username }}</p>
+                <p><strong>Email:</strong> {{ user.Email }}</p>
+                <p><strong>Birthday:</strong> {{ user.Birthday }}</p>
+            </div>
+
+            <!-- Edit User Information Form -->
+            <form>
+                <h2>Update User Info</h2>
+                <br>
+                <mat-form-field>
+                    <mat-label> Username </mat-label>
+                    <input matInput [(ngModel)]="userData.Username" type="text" name="Username">
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Password</mat-label>
+                    <input matInput [(ngModel)]="userData.Password" type="password" name="Password" required>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Email</mat-label>
+                    <input matInput [(ngModel)]="userData.Email" type="email" name="Email">
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Birthday</mat-label>
+                    <input matInput [(ngModel)]="userData.Birthday" type="date" name="Birthday">
+                </mat-form-field>
+                <button mat-raised-button color="primary" (click)="editUser()">
+                    Update
+                </button>
+                <button mat-button color="warn" (click)="deleteUser()">
+                    Delete Account permanently
+                </button>
+            </form>
+        </div>
+
+        <h2>Favorite Movies</h2>
+        <div *ngIf="favoriteMovies.length === 0">
+            <p>No favorites</p>
+        </div>
+        <mat-list class="favorites-list"> <!-- Add the "favorites-list" class to the mat-list -->
+            <mat-list-item *ngFor="let movie of favoriteMovies" class="favorites-item">
+                <!-- Add the "favorites-item" class to mat-list-item -->
+                <span matListItemTitle>{{movie.Title}}</span>
+                <div matListItemLine>{{movie.Director.Name}}</div>
+                <img matListItemAvatar src="{{movie.ImagePath}}" />
+                <button mat-icon-button (click)="deleteFavoriteMovie(movie._id)" color="primary">
+                    <mat-icon>favorite</mat-icon>
+                </button>
+            </mat-list-item>
+        </mat-list>
+    </div>

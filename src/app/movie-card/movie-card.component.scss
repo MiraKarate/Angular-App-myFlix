@@ -1,0 +1,27 @@
+.movie-page {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    /* Änderung hier */
+    grid-gap: 20px;
+    max-width: 1280px;
+    margin: auto;
+    padding: 40px 20px;
+}
+
+.movie-header {
+    min-height: 80px;
+    color: var(--primary-bg-color);
+}
+
+.mat-card-title {
+    font-weight: bold;
+}
+
+.mat-card-subtitle,
+.mat-card-actions button {
+    font-size: 20px;
+}
+
+img {
+    width: 200px
+}
