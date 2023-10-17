@@ -1,3 +1,4 @@
+/** Importing */
 import { Component, OnInit, Input } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { FetchApiDataService } from '../fetch-api-data.service';
@@ -10,16 +11,31 @@ import { formatDate } from '@angular/common';
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.scss']
 })
-export class UserProfileComponent implements OnInit {
 
+/**
+ * this component fetches user information from the API
+ * @user data is stored about the specific user
+ * @favoriteMovies stores an array of favorite movies from the user
+ */
+export class UserProfileComponent implements OnInit {
+  /** Declaring variables */
   user: any = {};
 
   favoriteMovies: any[] = [];
 
 
+  /**
+   * the updatedUser object is passed to the API to store the new information
+   */
+  @Input() userData = {
+    Name: '',
+    Username: '',
+    Password: '',
+    Email: '',
+    Birthday: '',
+  };
 
-  @Input() userData = { Name: '', Username: '', Password: '', Email: '', Birthday: '', };
-
+  /** Declaring variables for components injected to this components */
   constructor(
     public fetchApiData: FetchApiDataService,
     public snackBar: MatSnackBar,
@@ -31,12 +47,10 @@ export class UserProfileComponent implements OnInit {
     this.getUser();
   }
 
-
   /**
-   *  get user will get all of the users data so we can display it. 
-   *  get all movies will filter all of the movies id that are in the favorite movies array. 
-  */
-
+   * this function makes the API call to get user info from the database
+   * @returns a JSON object with user information
+   */
   getUser(): void {
     this.user = this.fetchApiData.getOneUser();
     this.userData.Username = this.user.Username;
@@ -74,7 +88,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   /**
-   *  delete user will delete their account permanently and be sent back to the welcome screen
+   *  delete user will delete their account permanently and be sent back to the welcome-page
    */
 
   deleteUser(): void {

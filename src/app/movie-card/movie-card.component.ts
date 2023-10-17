@@ -6,13 +6,22 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MovieDetailsComponent } from '../movie-details/movie-details.component';
 import { Router } from '@angular/router';
 
+/**
+ * defines movie card componenet
+ */
 @Component({
   selector: 'app-movie-card',
   templateUrl: './movie-card.component.html',
   styleUrls: ['./movie-card.component.scss']
 })
 export class MovieCardComponent implements OnInit {
+  /**
+   * below variables will manage the data received from the API calls 
+   * @movies stores the movies array from the database 
+   */
   movies: any[] = [];
+
+
   constructor(
     public fetchApiData: FetchApiDataService,
     public dialog: MatDialog,
@@ -32,9 +41,10 @@ export class MovieCardComponent implements OnInit {
   }
 
   /**
-   * This method will get all movies from the database
+   * Fetches all movies using the API call fetchApiData.getAllMovies()
+   * @function getMovies
    * @param void
-   * @returns movies array
+   * @returns an object array of all movies
    * @memberof MovieCardComponent
    * @see FetchApiDataService.getAllMovies()
    */
@@ -46,6 +56,11 @@ export class MovieCardComponent implements OnInit {
     });
   }
 
+  /**
+    * Opens dialog to display genre details
+    * @param name of specfic Genre
+    * @param description of specific Genre
+    */
   openGenreDialog(genre: any): void {
     this.dialog.open(MovieDetailsComponent, {
       data: {
@@ -55,6 +70,11 @@ export class MovieCardComponent implements OnInit {
     })
   }
 
+  /**
+     * Opens dialog to display movie details
+     * @param title of movie
+     * @param content of movie
+     */
   openSynopsisDialog(synopsis: string): void {
     this.dialog.open(MovieDetailsComponent, {
       data: {
@@ -64,6 +84,11 @@ export class MovieCardComponent implements OnInit {
     })
   }
 
+  /**
+    * Opens dialog to display director details
+    * @param name of director
+    * @param bio of director
+    */
   openDirectorDialog(director: any): void {
     this.dialog.open(MovieDetailsComponent, {
       data: {
@@ -73,6 +98,11 @@ export class MovieCardComponent implements OnInit {
     })
   }
 
+  /**
+    * Adds movie to user's favorite movies list using the API call fetchApiData.addFavMovie()
+    * @function addFavorite
+    * @param id of movie, type: string
+    */
   addFavorite(id: string): void {
     this.fetchApiData.addFavoriteMovie(id).subscribe((result) => {
 
@@ -81,18 +111,23 @@ export class MovieCardComponent implements OnInit {
       });
     });
   }
+
   /**
-   * 
-   * @param id 
+   * Determines if a movie id is in the user's favorites list or not
+   * @param id of movie, type: string
+   * @returns boolean showing movie id is true or false
    * @memberof MovieCardComponent
    * @see FetchApiDataService.isFavoriteMovie()
-   * @example isFavorite()
-   * @example removeFavorite()
    */
   isFavorite(id: string): boolean {
     return this.fetchApiData.isFavoriteMovie(id);
   }
 
+  /**
+   * Removes movie from user's favorite movies list using the API call fetchApiData.deleteFavMovie()
+   * @function removeFavorite
+   * @param id of movie, type: string
+   */
   removeFavorite(id: string): void {
     this.fetchApiData.deleteFavoriteMovie(id).subscribe((result) => {
       this.snackBar.open('Movie removed from favorites.', 'OK', {
