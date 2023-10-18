@@ -5,7 +5,9 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## About the MyFlix Angular App
 
-The MyFlix Angular App is a client-side application for managing and browsing movie data. It is designed to provide an intuitive and user-friendly interface for users interested in movies. The application includes the following essential views and features:
+The MyFlix Angular App is a client-side application for managing and browsing movie data. It interacts with a server-side application, which provides a RESTful API for managing and retrieving movie data. It is designed to provide an intuitive and user-friendly interface for users interested in movies. The client-side of the myFlix app includes several interface views that will handle data through the (previously defined) REST API endpoints.    
+
+## Essential Views & Features:
 
 ### Main View
 
@@ -34,76 +36,37 @@ The MyFlix Angular App is a client-side application for managing and browsing mo
 - Shows favorite movies and allows users to remove a movie from their favorites.
 - Permits existing users to deregister.
 
-## Development Server
-
-To run the development server, follow these steps:
-
-1. Clone this repository to your local machine:
-
-   ```bash
-   git clone https://github.com/your-username/MyFlixAngularClient.git
-Navigate to the project directory:
-
-bash
-Copy code
-cd MyFlixAngularClient
-Install project dependencies:
-
-bash
-Copy code
-npm install
-Start the development server:
-
-bash
-Copy code
-ng serve
-Open your web browser and go to http://localhost:4200 to access the application.
-
-Explore the application's features, interact with it, and customize it to your specific project requirements.
-
-Code Scaffolding
-You can generate various components and other Angular elements using Angular CLI. Use the following commands to generate:
-
-ng generate component component-name to generate a new component.
-You can also use ng generate directive|pipe|service|class|guard|interface|enum|module.
-Building the Project
-To build the project, use the following command:
-
-bash
-Copy code
-ng build
-The build artifacts will be stored in the dist/ directory.
-
-Running Unit Tests
-To run unit tests via Karma, use the following command:
-
-bash
-Copy code
-ng test
-Running End-to-End Tests
-To run end-to-end tests, use the following command:
-
-bash
-Copy code
-ng e2e
-You may need to add a package that implements end-to-end testing capabilities.
-
-## Angular 
+## About Angular 
 MyFlix App is a client-side application built using Angular. Angular is a powerful JavaScript framework for building web applications with dynamic and interactive user interfaces. It's widely used for creating single-page applications (SPAs) and is designed for large-scale, complex projects.
 
 If you're new to Angular, you may find it helpful to explore the Angular documentation to gain a better understanding of how this client-side application is structured and how components are used to build the user interface.
 
 For more information and resources about Angular, visit the official Angular website.
 
-## Contributions
-Contributions to this project are welcome. You can contribute by submitting pull requests, reporting issues, or improving the codebase. Please follow the established guidelines for contributing.
+## Development Server
 
+To run the development server, follow these steps:
 
+1. Clone this repository to your local machine:
 
+2. Navigate to the project directory:
 
-## Development server
+3. Install project dependencies:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+ ```bash
+npm install
+```
+
+4. Start the development server:
+
+ ```bash
+ng serve
+```
+
+5. Open your web browser and go to http://localhost:4200 to access the application.
+
+Explore the application's features, interact with it, and customize it to your specific project requirements.
+
 
 ## Code scaffolding
 
@@ -124,3 +87,9 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+
+## Contributions
+Contributions to this project are welcome. You can contribute by submitting pull requests, reporting issues, or improving the codebase. Please follow the established guidelines for contributing.
+
+
