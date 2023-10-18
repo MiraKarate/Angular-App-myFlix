@@ -16,18 +16,30 @@ The MyFlix Angular App is a client-side application for managing and browsing mo
 - Allows users to select a movie for more details.
 - Enables users to log out and navigate to the Profile view.
 
-### Single Movie View
+<img width="1490" alt="angular_myflix_movieview" src="https://github.com/MiraKarate/Angular-App-myFlix/assets/124045048/b5e9c7f8-b060-4f38-b999-99140c75c163">
+
+### Details Movie View
 
 - Displays detailed data (description, genre, director, image) about a single movie to the user.
 - Allows users to add a movie to their list of favorites.
 
+<img width="1304" alt="angular_myflix_genre" src="https://github.com/MiraKarate/Angular-App-myFlix/assets/124045048/218b3526-c3d1-4068-a47e-d8f55654c782">
+<img width="1066" alt="angular_myflix_director" src="https://github.com/MiraKarate/Angular-App-myFlix/assets/124045048/def3539f-9b4f-4743-8af5-069606088442">
+<img width="861" alt="angular_myflix_description" src="https://github.com/MiraKarate/Angular-App-myFlix/assets/124045048/9c70d808-cafd-430e-8ca1-51abb7d27831">
+<img width="1010" alt="angular_myflix_favorites" src="https://github.com/MiraKarate/Angular-App-myFlix/assets/124045048/564639c8-7aee-4477-a4a1-c1da4a654ac6">
+
 ### Signup View
 
 - Allows new users to register with their username, password, email, and date of birth.
+  
+<img width="1496" alt="Angular_myflix_welcome" src="https://github.com/MiraKarate/Angular-App-myFlix/assets/124045048/2e7fe2ca-998c-4030-8f47-a2caea1205c5">
 
 ### Login View
 
 - Enables users to log in with a username and password.
+
+<img width="739" alt="angular_myflix_login" src="https://github.com/MiraKarate/Angular-App-myFlix/assets/124045048/d3194eb2-2124-4f38-ab89-a917aec8db37">
+
 
 ### Profile View
 
@@ -35,6 +47,9 @@ The MyFlix Angular App is a client-side application for managing and browsing mo
 - Allows users to update their info (username, password, email, date of birth).
 - Shows favorite movies and allows users to remove a movie from their favorites.
 - Permits existing users to deregister.
+
+<img width="1486" alt="angular_myflix_profile" src="https://github.com/MiraKarate/Angular-App-myFlix/assets/124045048/6957d164-5b38-458a-8929-9640b6cbb244">
+
 
 ## About Angular 
 MyFlix App is a client-side application built using Angular. Angular is a powerful JavaScript framework for building web applications with dynamic and interactive user interfaces. It's widely used for creating single-page applications (SPAs) and is designed for large-scale, complex projects.
