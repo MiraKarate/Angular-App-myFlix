@@ -1,5 +1,5 @@
 
-# MyFlix Angular App (Client-Side)
+# MyFlix Angular App (Client-Side) 
 
 **This project was generated with Angular CLI version 16.2.3.**
 
