@@ -24,15 +24,11 @@ The MyFlix Angular App is a client-side application for managing and browsing mo
 - Allows users to add a movie to their list of favorites.
 
 <img width="1304" alt="angular_myflix_genre" src="https://github.com/MiraKarate/Angular-App-myFlix/assets/124045048/218b3526-c3d1-4068-a47e-d8f55654c782">
-<img width="1066" alt="angular_myflix_director" src="https://github.com/MiraKarate/Angular-App-myFlix/assets/124045048/def3539f-9b4f-4743-8af5-069606088442">
-<img width="861" alt="angular_myflix_description" src="https://github.com/MiraKarate/Angular-App-myFlix/assets/124045048/9c70d808-cafd-430e-8ca1-51abb7d27831">
 <img width="1010" alt="angular_myflix_favorites" src="https://github.com/MiraKarate/Angular-App-myFlix/assets/124045048/564639c8-7aee-4477-a4a1-c1da4a654ac6">
 
 ### Signup View
 
 - Allows new users to register with their username, password, email, and date of birth.
-  
-<img width="1496" alt="Angular_myflix_welcome" src="https://github.com/MiraKarate/Angular-App-myFlix/assets/124045048/2e7fe2ca-998c-4030-8f47-a2caea1205c5">
 
 ### Login View
 
