@@ -1,11 +1,16 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 /** component dispalying the navigation bar */
 @Component({
-  selector: 'app-navigation',
-  templateUrl: './navigation.component.html',
-  styleUrls: ['./navigation.component.scss']
+    selector: 'app-navigation',
+    templateUrl: './navigation.component.html',
+    styleUrls: ['./navigation.component.scss'],
+    standalone: true,
+    imports: [MatToolbarModule, MatButtonModule, MatIconModule]
 })
 export class NavigationComponent {
 

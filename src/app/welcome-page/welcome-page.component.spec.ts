@@ -8,8 +8,8 @@ describe('WelcomePageComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [WelcomePageComponent]
-    });
+    imports: [WelcomePageComponent]
+});
     fixture = TestBed.createComponent(WelcomePageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

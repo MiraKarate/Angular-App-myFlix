@@ -6,12 +6,19 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { FetchApiDataService } from '../fetch-api-data.service';
 /**Import is used to display notifications back to the user*/
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormsModule } from '@angular/forms';
+import { MatCardModule } from '@angular/material/card';
 
 /** @Component - Angular component decorator to declare a new component */
 @Component({
-  selector: 'app-user-registration-form',
-  templateUrl: './user-registration-form.component.html',
-  styleUrls: ['./user-registration-form.component.scss']
+    selector: 'app-user-registration-form',
+    templateUrl: './user-registration-form.component.html',
+    styleUrls: ['./user-registration-form.component.scss'],
+    standalone: true,
+    imports: [MatCardModule, FormsModule, MatFormFieldModule, MatInputModule, MatButtonModule]
 })
 
 /** @UserRegistrationFormComponent - class is defined and is set to implement the OnInit interface 

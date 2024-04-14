@@ -42,36 +42,34 @@ const appRoutes: Routes = [
 
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    UserRegistrationFormComponent,
-    UserLoginFormComponent,
-    MovieCardComponent,
-    WelcomePageComponent,
-    UserProfileComponent,
-    MovieDetailsComponent,
-    NavigationComponent,
-  ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    FormsModule,
-    MatDialogModule,
-    MatInputModule,
-    MatButtonModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatSnackBarModule,
-    RouterModule.forRoot(appRoutes),
-    MatIconModule,
-    MatToolbarModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatListModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations: [AppComponent],
+    imports: [
+        BrowserModule,
+        HttpClientModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        MatDialogModule,
+        MatInputModule,
+        MatButtonModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatSnackBarModule,
+        RouterModule.forRoot(appRoutes),
+        MatIconModule,
+        MatToolbarModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatListModule,
+        UserRegistrationFormComponent,
+        UserLoginFormComponent,
+        MovieCardComponent,
+        WelcomePageComponent,
+        UserProfileComponent,
+        MovieDetailsComponent,
+        NavigationComponent
+    ],
+    providers: [],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

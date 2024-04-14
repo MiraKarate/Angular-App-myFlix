@@ -5,14 +5,20 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MovieDetailsComponent } from '../movie-details/movie-details.component';
 import { Router } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { NgFor, NgIf } from '@angular/common';
 
 /**
  * defines movie card componenet
  */
 @Component({
-  selector: 'app-movie-card',
-  templateUrl: './movie-card.component.html',
-  styleUrls: ['./movie-card.component.scss']
+    selector: 'app-movie-card',
+    templateUrl: './movie-card.component.html',
+    styleUrls: ['./movie-card.component.scss'],
+    standalone: true,
+    imports: [NgFor, MatCardModule, MatButtonModule, NgIf, MatIconModule]
 })
 export class MovieCardComponent implements OnInit {
   /**

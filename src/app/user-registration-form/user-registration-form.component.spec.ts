@@ -8,8 +8,8 @@ describe('UserRegistrationFormComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [UserRegistrationFormComponent]
-    });
+    imports: [UserRegistrationFormComponent]
+});
     fixture = TestBed.createComponent(UserRegistrationFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

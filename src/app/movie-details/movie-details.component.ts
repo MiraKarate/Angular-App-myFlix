@@ -1,13 +1,16 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
 
 /**
  * Dialog component for displaying movie details
  */
 @Component({
-  selector: 'app-movie-details',
-  templateUrl: './movie-details.component.html',
-  styleUrls: ['./movie-details.component.scss']
+    selector: 'app-movie-details',
+    templateUrl: './movie-details.component.html',
+    styleUrls: ['./movie-details.component.scss'],
+    standalone: true,
+    imports: [MatDialogModule, MatButtonModule]
 })
 
 /**
