@@ -6,13 +6,14 @@ import { UserRegistrationFormComponent } from '../user-registration-form/user-re
 /** Importing Material */
 import { MatDialog } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
-    selector: 'app-welcome-page',
-    templateUrl: './welcome-page.component.html',
-    styleUrls: ['./welcome-page.component.scss'],
-    standalone: true,
-    imports: [MatButtonModule]
+  selector: 'app-welcome-page',
+  templateUrl: './welcome-page.component.html',
+  styleUrls: ['./welcome-page.component.scss'],
+  standalone: true,
+  imports: [MatButtonModule, ReactiveFormsModule]
 })
 export class WelcomePageComponent implements OnInit {
 

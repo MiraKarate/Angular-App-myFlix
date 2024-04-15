@@ -22,6 +22,7 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app/app-routing.module';
 import { withInterceptorsFromDi, provideHttpClient } from '@angular/common/http';
 import { BrowserModule, bootstrapApplication } from '@angular/platform-browser';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const appRoutes: Routes = [
   { path: 'welcome', component: WelcomePageComponent },
@@ -33,11 +34,11 @@ const appRoutes: Routes = [
 
 
 bootstrapApplication(AppComponent, {
-    providers: [
-        importProvidersFrom(BrowserModule, AppRoutingModule, FormsModule, MatDialogModule, MatInputModule, MatButtonModule, MatCardModule, MatFormFieldModule, MatSnackBarModule, MatIconModule, MatToolbarModule, MatDatepickerModule, MatNativeDateModule, MatListModule),
-        provideHttpClient(withInterceptorsFromDi()),
-        provideAnimations(),
-        provideRouter(appRoutes)
-    ]
+  providers: [
+    importProvidersFrom(BrowserModule, AppRoutingModule, FormsModule, MatDialogModule, MatInputModule, MatButtonModule, MatCardModule, MatFormFieldModule, MatSnackBarModule, MatIconModule, MatToolbarModule, MatDatepickerModule, MatNativeDateModule, MatListModule, ReactiveFormsModule),
+    provideHttpClient(withInterceptorsFromDi()),
+    provideAnimations(),
+    provideRouter(appRoutes)
+  ]
 })
   .catch(err => console.error(err));
