@@ -3,3 +3,4 @@
 /.angular/cachedist/
 .angular/
 dist/
+.DS_Store
