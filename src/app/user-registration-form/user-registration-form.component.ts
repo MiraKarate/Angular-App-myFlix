@@ -50,10 +50,10 @@ export class UserRegistrationFormComponent implements OnInit {
     public snackBar: MatSnackBar
   ) {
     this.registrationForm = this.formBuilder.group({
-      username: ['', [Validators.required]],
-      password: ['', [Validators.required]],
-      email: ['', [Validators.required, Validators.email]],
-      birthday: ['', [Validators.required]]
+      Username: ['', [Validators.required]],
+      Password: ['', [Validators.required]],
+      Email: ['', [Validators.required, Validators.email]],
+      Birthday: ['', [Validators.required]]
     });
   }
 

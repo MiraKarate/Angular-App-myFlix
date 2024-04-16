@@ -6,16 +6,20 @@
     <mat-card-content>
         <form [formGroup]="registrationForm" (ngSubmit)="registerUser()">
             <mat-form-field>
-                <input matInput formControlName="username" placeholder="Username" type="text">
+                <input matInput formControlName="Username" placeholder="Username" type="text">
+                <!-- Include error messages as needed -->
             </mat-form-field>
             <mat-form-field>
-                <input matInput formControlName="password" type="password" placeholder="Password">
+                <input matInput formControlName="Password" type="password" placeholder="Password">
+                <!-- Include error messages as needed -->
             </mat-form-field>
             <mat-form-field>
-                <input matInput formControlName="email" type="email" placeholder="Email">
+                <input matInput formControlName="Email" type="email" placeholder="Email">
+                <!-- Include error messages as needed -->
             </mat-form-field>
             <mat-form-field>
-                <input matInput formControlName="birthday" type="date" placeholder="Birthday">
+                <input matInput formControlName="Birthday" type="date" placeholder="Birthday">
+                <!-- Include error messages as needed -->
             </mat-form-field>
             <mat-card-actions>
                 <button mat-raised-button type="submit" [disabled]="registrationForm.invalid" color="primary">
