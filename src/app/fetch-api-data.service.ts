@@ -1,6 +1,6 @@
 
 import { Injectable } from '@angular/core';
-import { catchError, map } from 'rxjs/operators';
+import { catchError, map, tap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { AuthInterceptor } from './interceptors/auth.interceptor'; // Import des Interceptors
@@ -12,26 +12,9 @@ interface User {
   Birthday?: string;
 }
 
-interface Movie {
-  _id: string;
-  Title: string;
-  Description: string;
-  Director: Director;
-  Genre: Genre;
-  ImagePath: string;
-  Featured: boolean;
-}
-
-interface Director {
-  Name: string;
-  Bio: string;
-  Birth: string;
-}
-
-interface Genre {
-  Name: string;
-  Description: string;
-  ImagePath: string;
+interface ApiResponse {
+  user: User;
+  token: string;
 }
 
 
@@ -48,9 +31,12 @@ export class FetchApiDataService {
   constructor(private http: HttpClient) {
   }
   // Making the api call for the user registration endpoint
-  public userRegistration(userDetails: User): Observable<any> {
-    return this.http.post(this.apiUrl + 'users', userDetails).pipe(
-      catchError(this.handleError)
+  public userRegistration(userDetails: User): Observable<ApiResponse> {
+    console.log('User-Daten vor dem POST:', userDetails);
+    return this.http.post<ApiResponse>(this.apiUrl + 'users', userDetails).pipe(
+      tap((responseData) => {
+        console.log('Antwort der API:', responseData);
+      }), catchError(this.handleError)
     );
   }
 
@@ -180,7 +166,7 @@ export class FetchApiDataService {
     return body || {};
   }
 
-  private handleError(error: HttpErrorResponse): any {
+  private handleError(error: HttpErrorResponse): Observable<never> {
     if (error.error instanceof ErrorEvent) {
       console.log(error);
       console.log(error.error);
