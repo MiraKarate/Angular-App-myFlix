@@ -5,6 +5,34 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { Observable, throwError } from 'rxjs';
 import { AuthInterceptor } from './interceptors/auth.interceptor'; // Import des Interceptors
 
+interface User {
+  Username?: string;
+  Password?: string;
+  Email?: string;
+  Birthday?: string;
+}
+
+interface Movie {
+  _id: string;
+  Title: string;
+  Description: string;
+  Director: Director;
+  Genre: Genre;
+  ImagePath: string;
+  Featured: boolean;
+}
+
+interface Director {
+  Name: string;
+  Bio: string;
+  Birth: string;
+}
+
+interface Genre {
+  Name: string;
+  Description: string;
+  ImagePath: string;
+}
 
 
 //Declaring the api url that will provide data for the client app
@@ -14,21 +42,20 @@ const apiUrl = "https://myflix90.herokuapp.com/";
   providedIn: 'root'
 })
 export class FetchApiDataService {
+  apiUrl = "https://myflix90.herokuapp.com/";
   // Inject the HttpClient module to the constructor params
   // This will provide HttpClient to the entire class, making it available via this.http
   constructor(private http: HttpClient) {
   }
   // Making the api call for the user registration endpoint
-  public userRegistration(userDetails: any): Observable<any> {
-    // const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    console.log(userDetails);
-    return this.http.post(apiUrl + 'users', userDetails).pipe(
+  public userRegistration(userDetails: User): Observable<any> {
+    return this.http.post(this.apiUrl + 'users', userDetails).pipe(
       catchError(this.handleError)
     );
   }
 
   // User Login
-  public userLogin(loginDetails: any): Observable<any> {
+  public userLogin(loginDetails: User): Observable<any> {
     return this.http.post(apiUrl + 'login', loginDetails).pipe(
       catchError(this.handleError)
     );
@@ -73,7 +100,7 @@ export class FetchApiDataService {
 
   // Get One User Endpoint
   //Making the api call for the get one user endpoint
-  getOneUser(): Observable<any> {
+  getOneUser(): Observable<User> {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     return user;
   }
