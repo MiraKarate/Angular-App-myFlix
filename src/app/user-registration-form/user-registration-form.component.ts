@@ -6,19 +6,23 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { FetchApiDataService } from '../fetch-api-data.service';
 /**Import is used to display notifications back to the user*/
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatButtonModule } from '@angular/material/button';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms';
+
 
 /** @Component - Angular component decorator to declare a new component */
 @Component({
-    selector: 'app-user-registration-form',
-    templateUrl: './user-registration-form.component.html',
-    styleUrls: ['./user-registration-form.component.scss'],
-    standalone: true,
-    imports: [MatCardModule, FormsModule, MatFormFieldModule, MatInputModule, MatButtonModule]
+  selector: 'app-user-registration-form',
+  templateUrl: './user-registration-form.component.html',
+  styleUrls: ['./user-registration-form.component.scss'],
+  standalone: true,
+  imports: [MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule, ReactiveFormsModule,]
 })
 
 /** @UserRegistrationFormComponent - class is defined and is set to implement the OnInit interface 
@@ -27,8 +31,11 @@ import { MatCardModule } from '@angular/material/card';
 */
 export class UserRegistrationFormComponent implements OnInit {
 
+  registrationForm: FormGroup;
+
+
   /** Used to declare userData from the inputs 'user-registration-form.component.html' */
-  @Input() userData = { Username: '', Password: '', Email: '', Birthday: '' };
+  //@Input() userData = { Username: '', Password: '', Email: '', Birthday: '' };
 
   /** 
  * @constructor - injects dependencies into the UserLoginFormComponent
@@ -37,13 +44,21 @@ export class UserRegistrationFormComponent implements OnInit {
  * @param snackBar - used for displaying snackbar message that the user has successfully registered
   */
   constructor(
+    private formBuilder: FormBuilder,
     public fetchApiData: FetchApiDataService,
     public dialogRef: MatDialogRef<UserRegistrationFormComponent>,
-    public snackBar: MatSnackBar) { }
+    public snackBar: MatSnackBar
+  ) {
+    this.registrationForm = this.formBuilder.group({
+      username: ['', [Validators.required]],
+      password: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
+      birthday: ['', [Validators.required]]
+    });
+  }
 
   /** @ignore */
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
   /** 
      * This function uses the 'userRegistration()' function 
@@ -51,20 +66,25 @@ export class UserRegistrationFormComponent implements OnInit {
      * sending the form inputs to the backend
      */
   registerUser(): void {
-    this.fetchApiData.userRegistration(this.userData).subscribe((result) => {
-      /** logic for successful user registration */
-      this.dialogRef.close(); /** closes the modal on success */
-      console.log(result);
-      this.snackBar.open('User registration successful', 'OK', {
-        duration: 2000
-      });
-      /** Logic for unsuccessful user registration*/
-    }, (result) => {
-      console.log(result);
-      this.snackBar.open(result, 'OK', {
-        duration: 2000
-      });
+    if (this.registrationForm.invalid) {
+      return;
+    }
 
+    // Überprüfen und Protokollieren der Daten vor dem Senden
+    console.log('Registration data:', this.registrationForm.value);
+
+    this.fetchApiData.userRegistration(this.registrationForm.value).subscribe({
+      next: () => {
+        this.dialogRef.close();
+        this.snackBar.open('User registration successful', 'OK', {
+          duration: 2000
+        });
+      },
+      error: (error: any) => {
+        this.snackBar.open(error, 'OK', {
+          duration: 2000
+        });
+      }
     });
   }
 
