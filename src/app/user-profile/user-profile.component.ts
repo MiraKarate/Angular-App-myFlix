@@ -13,11 +13,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 
 @Component({
-    selector: 'app-user-profile',
-    templateUrl: './user-profile.component.html',
-    styleUrls: ['./user-profile.component.scss'],
-    standalone: true,
-    imports: [FormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, NgIf, MatListModule, NgFor, MatIconModule]
+  selector: 'app-user-profile',
+  templateUrl: './user-profile.component.html',
+  styleUrls: ['./user-profile.component.scss'],
+  standalone: true,
+  imports: [FormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, NgIf, MatListModule, NgFor, MatIconModule]
 })
 
 /**
@@ -63,7 +63,12 @@ export class UserProfileComponent implements OnInit {
     this.user = this.fetchApiData.getOneUser();
     this.userData.Username = this.user.Username;
     this.userData.Email = this.user.Email;
-    this.user.Birthday = formatDate(this.user.Birthday, 'yyyy-MM-dd', 'en-US', 'UTC+0');
+    this.user.DataBirthday = this.user.Birthday;
+
+    if (this.user.Birthday) {
+      this.user.DataBirthday = this.user.Birthday;
+      this.user.Birthday = formatDate(this.user.Birthday, 'yyyy-MM-dd', 'en-US', 'UTC+0');
+    }
 
 
     this.fetchApiData.getAllMovies().subscribe((response: any) => {

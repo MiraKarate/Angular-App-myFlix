@@ -1,8 +1,8 @@
 
 import { Injectable } from '@angular/core';
-import { catchError, map, tap } from 'rxjs/operators';
+import { catchError, map, tap, } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { Observable, throwError, of } from 'rxjs';
 import { AuthInterceptor } from './interceptors/auth.interceptor'; // Import des Interceptors
 
 interface User {
@@ -69,7 +69,8 @@ export class FetchApiDataService {
   // Get One Director Endpoint
   getOneDirector(directorName: string): Observable<any> {
     const token = localStorage.getItem('token');
-    return this.http.get(apiUrl + 'movies/director/' + directorName).pipe(
+    const encodedDirectorName = encodeURIComponent(directorName); // Leerzeichen codieren
+    return this.http.get(apiUrl + 'movies/director/' + encodedDirectorName).pipe(
       map(this.extractResponseData),
       catchError(this.handleError)
     );
@@ -84,21 +85,27 @@ export class FetchApiDataService {
     );
   }
 
-  // Get One User Endpoint
+  //Get One User Endpoint
   //Making the api call for the get one user endpoint
   getOneUser(): Observable<User> {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     return user;
   }
 
-
   // Edit User Endpoint
   // Making the api call for the edit user endpoint
   editUser(updatedUser: any): Observable<any> {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     const token = localStorage.getItem('token');
+
+    // Führe die Aktualisierung der Benutzerdaten auf dem Server durch
     return this.http.put(apiUrl + 'users/' + user.Username, updatedUser).pipe(
-      map(this.extractResponseData),
+      // Verarbeite die Antwort des Servers
+      tap((responseData) => {
+        // Aktualisiere die Benutzerdaten im lokalen Speicher
+        const updatedUserData = { ...user, ...updatedUser };
+        localStorage.setItem('user', JSON.stringify(updatedUserData));
+      }),
       catchError(this.handleError)
     );
   }
@@ -117,10 +124,14 @@ export class FetchApiDataService {
 
 
   addFavoriteMovie(movieId: string): Observable<any> {
-    const user = JSON.parse(localStorage.getItem('user') || '{}');
-    const token = localStorage.getItem('token');
+    let user = JSON.parse(localStorage.getItem('user') || '{}');
+    if (!user.FavoriteMovies) {
+      user.FavoriteMovies = [];
+    }
     user.FavoriteMovies.push(movieId);
     localStorage.setItem('user', JSON.stringify(user));
+
+    const token = localStorage.getItem('token');
     return this.http.post(apiUrl + 'users/' + user.Username + '/movies/' + movieId, {}, {
       headers: new HttpHeaders(
         {
@@ -139,15 +150,17 @@ export class FetchApiDataService {
   }
 
   deleteFavoriteMovie(movieId: string): Observable<any> {
-    const user = JSON.parse(localStorage.getItem('user') || '{}');
-    const token = localStorage.getItem('token');
-
+    let user = JSON.parse(localStorage.getItem('user') || '{}');
+    if (!user.FavoriteMovies) {
+      user.FavoriteMovies = [];
+    }
     const index = user.FavoriteMovies.indexOf(movieId);
-    console.log(index);
-    if (index > -1) { // only splice array when item is found
-      user.FavoriteMovies.splice(index, 1); // 2nd parameter means remove one item only
+    if (index > -1) {
+      user.FavoriteMovies.splice(index, 1);
     }
     localStorage.setItem('user', JSON.stringify(user));
+
+    const token = localStorage.getItem('token');
     return this.http.delete(apiUrl + 'users/' + user.Username + '/movies/' + movieId, {
       headers: new HttpHeaders(
         {

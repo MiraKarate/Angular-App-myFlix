@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { MatDialogModule } from '@angular/material/dialog';
 import { WelcomePageComponent } from './welcome-page.component';
 
 describe('WelcomePageComponent', () => {
@@ -8,8 +8,8 @@ describe('WelcomePageComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-    imports: [WelcomePageComponent]
-});
+      imports: [WelcomePageComponent, MatDialogModule]
+    });
     fixture = TestBed.createComponent(WelcomePageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

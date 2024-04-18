@@ -16,7 +16,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes), ReactiveFormsModule],
+  imports: [RouterModule.forRoot(routes), ReactiveFormsModule, HttpClientModule],
   exports: [RouterModule],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }

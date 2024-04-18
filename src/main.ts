@@ -23,6 +23,9 @@ import { AppRoutingModule } from './app/app-routing.module';
 import { withInterceptorsFromDi, provideHttpClient } from '@angular/common/http';
 import { BrowserModule, bootstrapApplication } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './app/interceptors/auth.interceptor'; // Pfade entsprechend anpassen
+
 
 const appRoutes: Routes = [
   { path: 'welcome', component: WelcomePageComponent },
@@ -37,6 +40,7 @@ bootstrapApplication(AppComponent, {
   providers: [
     importProvidersFrom(BrowserModule, AppRoutingModule, FormsModule, MatDialogModule, MatInputModule, MatButtonModule, MatCardModule, MatFormFieldModule, MatSnackBarModule, MatIconModule, MatToolbarModule, MatDatepickerModule, MatNativeDateModule, MatListModule, ReactiveFormsModule),
     provideHttpClient(withInterceptorsFromDi()),
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     provideAnimations(),
     provideRouter(appRoutes)
   ]
