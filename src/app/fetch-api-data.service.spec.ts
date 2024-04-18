@@ -39,6 +39,43 @@ describe('FetchApiDataService', () => {
     expect(service).toBeTruthy();
   });
 
+  it('should handle user registration', () => {
+    const userData = {
+      Username: 'newuser',
+      Password: 'newpassword',
+      Email: 'newuser@example.com',
+      Birthday: '1995-05-05'
+    };
+
+    service.userRegistration(userData).subscribe(response => {
+      expect(response).toBeTruthy();
+      expect(response.user.Username).toBe('newuser');
+      expect(response.token).toBeTruthy();
+    });
+
+    const req = httpMock.expectOne('https://myflix90.herokuapp.com/users');
+    expect(req.request.method).toBe('POST');
+    req.flush({ user: userData, token: 'dummyToken' });
+  });
+
+  it('should handle user login', () => {
+    const loginData = {
+      Username: 'username',
+      Password: 'password'
+    };
+
+    service.userLogin(loginData).subscribe(response => {
+      expect(response).toBeTruthy();
+      expect(response.user.Username).toBe('username');
+      expect(response.token).toBeTruthy();
+    });
+
+    const req = httpMock.expectOne('https://myflix90.herokuapp.com/login');
+    expect(req.request.method).toBe('POST');
+    req.flush({ user: { Username: 'username' }, token: 'dummyToken' });
+  });
+
+
   it('should retrieve all movies', () => {
     const mockMovies = [{ id: 1, title: 'Movie 1' }, { id: 2, title: 'Movie 2' }];
 
@@ -164,6 +201,7 @@ describe('FetchApiDataService', () => {
 
     httpMock.verify(); // Stelle sicher, dass alle erwarteten Anfragen abgeschlossen wurden
   });
+
 
 
 });
