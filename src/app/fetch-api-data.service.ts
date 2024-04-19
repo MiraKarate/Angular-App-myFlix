@@ -32,6 +32,9 @@ export class FetchApiDataService {
   }
   // Making the api call for the user registration endpoint
   public userRegistration(userDetails: User): Observable<ApiResponse> {
+    if (!userDetails.Username || !userDetails.Password) {
+      return throwError(() => new Error('Invalid username or password'));
+    }
     console.log('User-Daten vor dem POST:', userDetails);
     return this.http.post<ApiResponse>(this.apiUrl + 'users', userDetails).pipe(
       tap((responseData) => {
@@ -50,6 +53,9 @@ export class FetchApiDataService {
   // Get All Movies
   getAllMovies(): Observable<any> {
     const token = localStorage.getItem('token');
+    if (!token) {
+      return throwError(() => new Error('User is not logged in'));
+    }
     return this.http.get(apiUrl + 'movies').pipe(
       map(this.extractResponseData),
       catchError(this.handleError)
@@ -98,18 +104,21 @@ export class FetchApiDataService {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     const token = localStorage.getItem('token');
 
-    // Führe die Aktualisierung der Benutzerdaten auf dem Server durch
+    if (!user || !user.Username || !updatedUser.Username || !updatedUser.Password) {
+      return throwError(new Error('Invalid user data provided'));
+    }
+
+    // Send the request to update user data on the server
     return this.http.put(apiUrl + 'users/' + user.Username, updatedUser).pipe(
-      // Verarbeite die Antwort des Servers
+      // Process the server response
       tap((responseData) => {
-        // Aktualisiere die Benutzerdaten im lokalen Speicher
+        // Update the user data in local storage
         const updatedUserData = { ...user, ...updatedUser };
         localStorage.setItem('user', JSON.stringify(updatedUserData));
       }),
       catchError(this.handleError)
     );
   }
-
 
   // Delete User Endpoint
   deleteUser(): Observable<any> {
@@ -120,8 +129,6 @@ export class FetchApiDataService {
       catchError(this.handleError)
     );
   }
-
-
 
   addFavoriteMovie(movieId: string): Observable<any> {
     let user = JSON.parse(localStorage.getItem('user') || '{}');
@@ -191,7 +198,14 @@ export class FetchApiDataService {
         `Error Status code ${error.status}, ` +
         `Error body is: ${error.error}`);
     }
-    return throwError(() =>
-      new Error('Something bad happened; please try again later.'));
+    if (error.status === 409) {
+      // Wenn der Fehlercode 409 (Konflikt) ist, bedeutet dies, dass der Benutzername bereits existiert
+      return throwError(() => new Error('Username already exists'));
+    } else {
+      // Andernfalls behandeln Sie den Fehler allgemein
+      return throwError(() =>
+        new Error('Something bad happened; please try again later.')
+      );
+    }
   }
 }
