@@ -394,19 +394,6 @@ describe('FetchApiDataService', () => {
     httpMock.verify(); // Stelle sicher, dass alle erwarteten HTTP-Anfragen abgeschlossen wurden
   });
 
-  xit('should handle case when the server response is empty while retrieving a movie by ID', () => {
-    const movieId = '12345'; // Beispiel-ID für einen Film
-
-    service.getOneMovie(movieId).subscribe(movie => {
-      expect(movie).toBeFalsy(); // Wenn die Serverantwort leer ist, sollte das Ergebnis falsch sein
-      // Weitere Erwartungen basierend auf der leeren Antwort hinzufügen
-    });
-
-    const req = httpMock.expectOne(`https://myflix90.herokuapp.com/movies/${movieId}`);
-    expect(req.request.method).toBe('GET');
-    req.flush(null); // Simulieren Sie eine leere Serverantwort
-  });
-
   it('should return an error when user data is missing in local storage while trying to edit user information', () => {
     // Simulate the case where user data is missing in local storage
     localStorage.removeItem('user');
