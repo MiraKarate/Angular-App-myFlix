@@ -14,11 +14,11 @@ import { NgFor, NgIf } from '@angular/common';
  * defines movie card componenet
  */
 @Component({
-    selector: 'app-movie-card',
-    templateUrl: './movie-card.component.html',
-    styleUrls: ['./movie-card.component.scss'],
-    standalone: true,
-    imports: [NgFor, MatCardModule, MatButtonModule, NgIf, MatIconModule]
+  selector: 'app-movie-card',
+  templateUrl: './movie-card.component.html',
+  styleUrls: ['./movie-card.component.scss'],
+  standalone: true,
+  imports: [NgFor, MatCardModule, MatButtonModule, NgIf, MatIconModule]
 })
 export class MovieCardComponent implements OnInit {
   /**

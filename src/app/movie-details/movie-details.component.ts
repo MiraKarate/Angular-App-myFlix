@@ -6,11 +6,11 @@ import { MatButtonModule } from '@angular/material/button';
  * Dialog component for displaying movie details
  */
 @Component({
-    selector: 'app-movie-details',
-    templateUrl: './movie-details.component.html',
-    styleUrls: ['./movie-details.component.scss'],
-    standalone: true,
-    imports: [MatDialogModule, MatButtonModule]
+  selector: 'app-movie-details',
+  templateUrl: './movie-details.component.html',
+  styleUrls: ['./movie-details.component.scss'],
+  standalone: true,
+  imports: [MatDialogModule, MatButtonModule]
 })
 
 /**
