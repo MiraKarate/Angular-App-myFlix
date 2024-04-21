@@ -6,11 +6,11 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 
 /** component dispalying the navigation bar */
 @Component({
-    selector: 'app-navigation',
-    templateUrl: './navigation.component.html',
-    styleUrls: ['./navigation.component.scss'],
-    standalone: true,
-    imports: [MatToolbarModule, MatButtonModule, MatIconModule]
+  selector: 'app-navigation',
+  templateUrl: './navigation.component.html',
+  styleUrls: ['./navigation.component.scss'],
+  standalone: true,
+  imports: [MatToolbarModule, MatButtonModule, MatIconModule]
 })
 export class NavigationComponent {
 

@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">91.04% </span>
+                <span class="strong">91.17% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>61/67</span>
+                <span class='fraction'>62/68</span>
             </div>
         
             
@@ -37,9 +37,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">95.23% </span>
+                <span class="strong">95.45% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>20/21</span>
+                <span class='fraction'>21/22</span>
             </div>
         
             
@@ -255,31 +255,7 @@
 <a name='L190'></a><a href='#L190'>190</a>
 <a name='L191'></a><a href='#L191'>191</a>
 <a name='L192'></a><a href='#L192'>192</a>
-<a name='L193'></a><a href='#L193'>193</a>
-<a name='L194'></a><a href='#L194'>194</a>
-<a name='L195'></a><a href='#L195'>195</a>
-<a name='L196'></a><a href='#L196'>196</a>
-<a name='L197'></a><a href='#L197'>197</a>
-<a name='L198'></a><a href='#L198'>198</a>
-<a name='L199'></a><a href='#L199'>199</a>
-<a name='L200'></a><a href='#L200'>200</a>
-<a name='L201'></a><a href='#L201'>201</a>
-<a name='L202'></a><a href='#L202'>202</a>
-<a name='L203'></a><a href='#L203'>203</a>
-<a name='L204'></a><a href='#L204'>204</a>
-<a name='L205'></a><a href='#L205'>205</a>
-<a name='L206'></a><a href='#L206'>206</a>
-<a name='L207'></a><a href='#L207'>207</a>
-<a name='L208'></a><a href='#L208'>208</a>
-<a name='L209'></a><a href='#L209'>209</a>
-<a name='L210'></a><a href='#L210'>210</a>
-<a name='L211'></a><a href='#L211'>211</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L193'></a><a href='#L193'>193</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -421,12 +397,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -444,12 +414,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -490,17 +454,11 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { Observable, throwError, of } from 'rxjs';
 import { AuthInterceptor } from './interceptors/auth.interceptor'; // Import des Interceptors
 &nbsp;
-interface User {
-  Username?: string;
-  Password?: string;
-  Email?: string;
-  Birthday?: string;
-}
-&nbsp;
-interface ApiResponse {
-  user: User;
-  token: string;
-}
+import { User } from '../interfaces/user.interface';
+import { ApiResponse } from '../interfaces/api-response.interface';
+import { Director } from '../interfaces/director.interface';
+import { Genre } from '../interfaces/genre.interface';
+import { Movie } from '../interfaces/movie.interface';
 &nbsp;
 &nbsp;
 //Declaring the api url that will provide data for the client app
@@ -536,21 +494,21 @@ export class FetchApiDataService {
   }
 &nbsp;
   // Get All Movies
-  getAllMovies(): Observable&lt;any&gt; {
+  getAllMovies(): Observable&lt;Movie[]&gt; {
     const token = localStorage.getItem('token');
     if (!token) {
       return throwError(() =&gt; new Error('User is not logged in'));
     }
-    return this.http.get(apiUrl + 'movies').pipe(
+    return this.http.get&lt;Movie[]&gt;(apiUrl + 'movies').pipe(
       map(this.extractResponseData),
       catchError(this.handleError)
     );
   }
 &nbsp;
   // Get One Movie
-  getOneMovie(movieId: string): Observable&lt;any&gt; {
+  getOneMovie(movieId: string): Observable&lt;Movie&gt; {
     const token = localStorage.getItem('token');
-    return this.http.get(apiUrl + 'movies/' + movieId).pipe(
+    return this.http.get&lt;Movie&gt;(apiUrl + 'movies/' + movieId).pipe(
       map(this.extractResponseData),
       catchError(this.handleError)
     );
@@ -558,19 +516,19 @@ export class FetchApiDataService {
 &nbsp;
 &nbsp;
   // Get One Director Endpoint
-  getOneDirector(directorName: string): Observable&lt;any&gt; {
+  getOneDirector(directorName: string): Observable&lt;Director&gt; {
     const token = localStorage.getItem('token');
     const encodedDirectorName = encodeURIComponent(directorName); // Leerzeichen codieren
-    return this.http.get(apiUrl + 'movies/director/' + encodedDirectorName).pipe(
+    return this.http.get&lt;Director&gt;(apiUrl + 'movies/director/' + encodedDirectorName).pipe(
       map(this.extractResponseData),
       catchError(this.handleError)
     );
   }
 &nbsp;
   // Get One Genre Endpoint
-  getOneGenre(genreName: string): Observable&lt;any&gt; {
+  getOneGenre(genreName: string): Observable&lt;Genre&gt; {
     const token = localStorage.getItem('token');
-    return this.http.get(apiUrl + 'movies/genre/' + genreName).pipe(
+    return this.http.get&lt;Genre&gt;(apiUrl + 'movies/genre/' + genreName).pipe(
       map(this.extractResponseData),
       catchError(this.handleError)
     );
@@ -585,16 +543,16 @@ export class FetchApiDataService {
 &nbsp;
   // Edit User Endpoint
   // Making the api call for the edit user endpoint
-  editUser(updatedUser: any): Observable&lt;any&gt; {
+  editUser(updatedUser: any): Observable&lt;ApiResponse&gt; {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     const token = localStorage.getItem('token');
 &nbsp;
     if (!user || !user.Username || !updatedUser.Username || !updatedUser.Password) {
-      return throwError(new Error('Invalid user data provided'));
+      return throwError(() =&gt; new Error('Invalid user data provided'));
     }
 &nbsp;
     // Send the request to update user data on the server
-    return this.http.put(apiUrl + 'users/' + user.Username, updatedUser).pipe(
+    return this.http.put&lt;ApiResponse&gt;(apiUrl + 'users/' + user.Username, updatedUser).pipe(
       // Process the server response
       tap((responseData) =&gt; {
         // Update the user data in local storage
@@ -606,7 +564,7 @@ export class FetchApiDataService {
   }
 &nbsp;
   // Delete User Endpoint
-  deleteUser(): Observable&lt;any&gt; {
+  deleteUser(): Observable&lt;void&gt; {
     const userid = localStorage.getItem('userid');
     const token = localStorage.getItem('token');
     return this.http.delete(apiUrl + 'users/' + userid).pipe(
@@ -615,7 +573,7 @@ export class FetchApiDataService {
     );
   }
 &nbsp;
-  addFavoriteMovie(movieId: string): Observable&lt;any&gt; {
+  addFavoriteMovie(movieId: string): Observable&lt;ApiResponse&gt; {
     let user = JSON.parse(localStorage.getItem('user') || <span class="branch-1 cbranch-no" title="branch not covered" >'{}')</span>;
     if (!user.FavoriteMovies) {
       user.FavoriteMovies = [];
@@ -624,13 +582,7 @@ export class FetchApiDataService {
     localStorage.setItem('user', JSON.stringify(user));
 &nbsp;
     const token = localStorage.getItem('token');
-    return this.http.post(apiUrl + 'users/' + user.Username + '/movies/' + movieId, {}, {
-      headers: new HttpHeaders(
-        {
-          Authorization: 'Bearer ' + token,
-        }),
-      responseType: "text"
-    }).pipe(
+    return this.http.post&lt;ApiResponse&gt;(apiUrl + 'users/' + user.Username + '/movies/' + movieId, {}).pipe(
       map(this.extractResponseData),
       catchError(this.handleError)
     );
@@ -641,7 +593,7 @@ export class FetchApiDataService {
     return user.FavoriteMovies.indexOf(movieId) &gt;= 0;
   }
 &nbsp;
-  deleteFavoriteMovie(movieId: string): Observable&lt;any&gt; {
+  deleteFavoriteMovie(movieId: string): Observable&lt;ApiResponse&gt; {
     let user = JSON.parse(localStorage.getItem('user') || <span class="branch-1 cbranch-no" title="branch not covered" >'{}')</span>;
     if (!user.FavoriteMovies) {
       user.FavoriteMovies = [];
@@ -653,13 +605,7 @@ export class FetchApiDataService {
     localStorage.setItem('user', JSON.stringify(user));
 &nbsp;
     const token = localStorage.getItem('token');
-    return this.http.delete(apiUrl + 'users/' + user.Username + '/movies/' + movieId, {
-      headers: new HttpHeaders(
-        {
-          Authorization: 'Bearer ' + token,
-        }),
-      responseType: "text"
-    }).pipe(
+    return this.http.delete&lt;ApiResponse&gt;(apiUrl + 'users/' + user.Username + '/movies/' + movieId).pipe(
       map(this.extractResponseData),
       catchError(this.handleError)
     );
@@ -700,7 +646,7 @@ export class FetchApiDataService {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-04-19T11:32:31.769Z
+                at 2024-04-21T18:39:17.770Z
             </div>
         <script src="prettify.js"></script>
         <script>

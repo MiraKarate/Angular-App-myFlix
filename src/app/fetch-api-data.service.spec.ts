@@ -1,7 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { FetchApiDataService } from './fetch-api-data.service';
-import { fakeAsync, tick } from '@angular/core/testing';
+import { Movie } from 'src/interfaces/movie.interface';
+import { Genre } from 'src/interfaces/genre.interface';
 
 describe('FetchApiDataService', () => {
   let service: FetchApiDataService;
@@ -104,8 +105,6 @@ describe('FetchApiDataService', () => {
   });
 
 
-
-
   it('should handle user registration with existing username', () => {
     const existingUser = {
       Username: 'existinguser',
@@ -175,8 +174,12 @@ describe('FetchApiDataService', () => {
   });
 
 
+
   it('should retrieve all movies', () => {
-    const mockMovies = [{ id: 1, title: 'Movie 1' }, { id: 2, title: 'Movie 2' }];
+    const mockMovies: Movie[] = [
+      { id: '1', Title: 'Movie 1', Description: 'Description 1', Director: 'Director 1', Genre: 'Genre 1' },
+      { id: '2', Title: 'Movie 2', Description: 'Description 2', Director: 'Director 2', Genre: 'Genre 2' }
+    ];
 
     service.getAllMovies().subscribe(movies => {
       expect(movies).toEqual(mockMovies);
@@ -212,16 +215,23 @@ describe('FetchApiDataService', () => {
 
   it('should retrieve one genre by name', () => {
     const genreName = 'Science Fiction';
-    const mockGenre = { name: genreName, movies: [{ id: '1', title: 'Movie 1' }, { id: '2', title: 'Movie 2' }] };
+    const mockGenre: Genre = {
+      Name: genreName,
+      Description: 'Description of Science Fiction genre',
+      Movies: [
+        { id: '1', Title: 'Movie 1', Description: 'Description 1', Director: 'Director 1', Genre: 'Science Fiction' },
+        { id: '2', Title: 'Movie 2', Description: 'Description 2', Director: 'Director 2', Genre: 'Science Fiction' }
+      ]
+    };
 
     service.getOneGenre(genreName).subscribe(genre => {
-      expect(genre).toEqual(mockGenre); // Überprüfen, ob die zurückgegebene Genre-Information dem erwarteten Genre entspricht
-      expect(genre.movies.length).toBeGreaterThan(0); // Überprüfen, ob die Liste von Filmen nicht leer ist
+      expect(genre).toEqual(mockGenre);
+      expect(genre.Movies.length).toBeGreaterThan(0);
     });
 
     const req = httpMock.expectOne('https://myflix90.herokuapp.com/movies/genre/' + genreName);
     expect(req.request.method).toBe('GET');
-    req.flush(mockGenre); // Simulieren Sie eine Serverantwort mit dem Genre und den dazugehörigen Filmen
+    req.flush(mockGenre);
   });
 
   it('should handle empty response when retrieving a genre', () => {
@@ -311,7 +321,13 @@ describe('FetchApiDataService', () => {
 
   it('should retrieve movie details successfully', () => {
     const movieId = 'Blade%20Runner';
-    const mockMovieData = { /* Mock Film Daten */ };
+    const mockMovieData: Movie = {
+      id: 'Blade Runner',
+      Title: 'Blade Runner',
+      Description: 'Description of Blade Runner',
+      Director: 'Ridley Scott',
+      Genre: 'Science Fiction'
+    };
 
     service.getOneMovie(movieId).subscribe(movie => {
       expect(movie).toEqual(mockMovieData);
@@ -383,13 +399,12 @@ describe('FetchApiDataService', () => {
 
   it('should delete user account', () => {
     service.deleteUser().subscribe(response => {
-      expect(response.message).toBe('User successfully deleted');
-      // Weitere Erwartungen basierend auf der Serverantwort hinzufügen, falls erforderlich
+      expect(response).toBeTruthy(); // Wir erwarten keine Rückgabe, deshalb prüfen wir nur, ob die Anfrage erfolgreich war
     });
 
     const req = httpMock.expectOne('https://myflix90.herokuapp.com/users/null');
     expect(req.request.method).toBe('DELETE');
-    req.flush({ message: 'User successfully deleted' }); // Dummy-Daten für die Antwort
+    req.flush({ message: 'User successfully deleted' }); // Hier erwarten wir eine Nachricht, dass der Benutzer erfolgreich gelöscht wurde
 
     httpMock.verify(); // Stelle sicher, dass alle erwarteten HTTP-Anfragen abgeschlossen wurden
   });
