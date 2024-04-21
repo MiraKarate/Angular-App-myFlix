@@ -115,6 +115,8 @@ export class MovieCardComponent implements OnInit {
       this.snackBar.open('Movie added to favorites.', 'OK', {
         duration: 2000
       });
+      // Update movie list after adding to favorites
+      this.getMovies();
     });
   }
 
@@ -139,6 +141,8 @@ export class MovieCardComponent implements OnInit {
       this.snackBar.open('Movie removed from favorites.', 'OK', {
         duration: 2000
       });
+      // Update movie list after removing from favorites
+      this.getMovies();
     });
   }
 }
