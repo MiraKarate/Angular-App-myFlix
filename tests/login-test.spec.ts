@@ -25,6 +25,8 @@ test('test', async ({ page }) => {
     // Warte auf ein sichtbares Element auf der Seite, das nur für angemeldete Benutzer sichtbar ist
     await page.waitForSelector('mat-card-title', { state: 'visible' });
 
+    // Ausgabe des localStorage-Inhalts
+    console.log(await page.evaluate(() => localStorage));
 
     // Überprüfe, ob die Anmeldung erfolgreich war, indem du den local storage überprüfst
     const user = await page.evaluate(() => localStorage.getItem('user'));
