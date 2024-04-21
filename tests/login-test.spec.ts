@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 test('test', async ({ page }) => {
   // Navigiere zur Seite mit dem Login-Formular
-  await page.goto('http://localhost:4200/Angular-App-myFlix/');
+  await page.goto('https://MiraKarate.github.io/Angular-App-myFlix/');
 
   // Klicke auf den Login-Button
   await page.getByRole('button', { name: 'Login' }).click();
