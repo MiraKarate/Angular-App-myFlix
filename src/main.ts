@@ -10,6 +10,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MovieCardComponent } from './app/movie-card/movie-card.component';
 import { WelcomePageComponent } from './app/welcome-page/welcome-page.component';
+import { UserProfileComponent } from './app/user-profile/user-profile.component';
 import { provideRouter, Routes } from '@angular/router';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -19,7 +20,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { AppRoutingModule } from './app/app-routing.module';
 import { withInterceptorsFromDi, provideHttpClient } from '@angular/common/http';
 import { BrowserModule, bootstrapApplication } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -30,6 +30,7 @@ import { AuthInterceptor } from './app/interceptors/auth.interceptor'; // Pfade 
 const appRoutes: Routes = [
   { path: 'welcome', component: WelcomePageComponent },
   { path: 'movies', component: MovieCardComponent },
+  { path: 'profile', component: UserProfileComponent },
   { path: '', redirectTo: 'welcome', pathMatch: 'prefix' },
 ];
 
@@ -38,7 +39,7 @@ const appRoutes: Routes = [
 
 bootstrapApplication(AppComponent, {
   providers: [
-    importProvidersFrom(BrowserModule, AppRoutingModule, FormsModule, MatDialogModule, MatInputModule, MatButtonModule, MatCardModule, MatFormFieldModule, MatSnackBarModule, MatIconModule, MatToolbarModule, MatDatepickerModule, MatNativeDateModule, MatListModule, ReactiveFormsModule),
+    importProvidersFrom(BrowserModule, FormsModule, MatDialogModule, MatInputModule, MatButtonModule, MatCardModule, MatFormFieldModule, MatSnackBarModule, MatIconModule, MatToolbarModule, MatDatepickerModule, MatNativeDateModule, MatListModule, ReactiveFormsModule),
     provideHttpClient(withInterceptorsFromDi()),
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     provideAnimations(),
