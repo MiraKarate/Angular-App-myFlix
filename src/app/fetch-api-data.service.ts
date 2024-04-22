@@ -168,7 +168,7 @@ export class FetchApiDataService {
     return body || {};
   }
 
-  private handleError(error: HttpErrorResponse): Observable<never> {
+  private handleError(error: HttpErrorResponse): Observable<any> {
     if (error.error instanceof ErrorEvent) {
       console.log(error);
       console.log(error.error);
